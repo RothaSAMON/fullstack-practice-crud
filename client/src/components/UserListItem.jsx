@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Button, Typography, CircularProgress } from "@mui/material";
@@ -39,6 +39,7 @@ const UserListItem = ({ name, email, id }) => {
                     display: "flex",
                     flexDirection: "column",
                     gap: 2, // Gap between elements
+                    borderRadius: '16px'
                 }}
             >
                 <Typography variant="h6" gutterBottom>

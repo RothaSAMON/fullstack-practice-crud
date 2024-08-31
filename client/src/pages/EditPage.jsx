@@ -6,7 +6,7 @@ import {
     TextField,
     CircularProgress,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEditUserMutation, useGetSingleUserQuery } from "../store";
 
@@ -19,27 +19,44 @@ const EditPage = () => {
         data: user,
         isLoading: isUserLoading,
         isError: isUserError,
+        refetch,
     } = useGetSingleUserQuery({ id });
 
     const [editUser, { isLoading: isEditLoading, isError: isEditError }] =
         useEditUserMutation();
-    console.log(user);
 
-    
-    // State to manage form input
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    // Refs to manage form input
+    const nameRef = useRef("");
+    const emailRef = useRef("");
 
     useEffect(() => {
-        if (user) {
-            setName(user.name || ""); // Ensure default value
-            setEmail(user.email || ""); // Ensure default value
+        //GOOD practice in Nested data
+        if (user?.data?.user) {
+            nameRef.current.value = user.data.user.name;
+            emailRef.current.value = user.data.user.email;
         }
-    }, [user]);
+        refetch();
+    //Adding refetch to the dependency array, the useEffect hook will be re-run whenever either user or refetch changes, ensuring that the input fields are updated correctly.
+    }, [user, refetch]);
+    console.log(user?.data?.user);
+
+    //BAD practice in Nested data
+    // useEffect(() => {
+    //     if (user && user.data && user.data.user) {
+    //         nameRef.current = user.data.user.name || ""; // Ensure default value
+    //         emailRef.current = user.data.user.email || ""; // Ensure default value
+    //     }
+    // }, [user]);
 
     const handleSave = async () => {
         try {
-            await editUser({ id, name, email }).unwrap();
+            await editUser({
+                id,
+                name: nameRef.current.value,
+                email: emailRef.current.value,
+            }).unwrap();
+            console.log(nameRef);
+
             navigate("/"); // Redirect to home page after successful edit
         } catch (error) {
             console.error("Failed to edit user:", error);
@@ -66,18 +83,8 @@ const EditPage = () => {
             </Typography>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <TextField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    fullWidth
-                />
-                <TextField
-                    label="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    fullWidth
-                />
+                <TextField label="Name" inputRef={nameRef} fullWidth />
+                <TextField label="Email" inputRef={emailRef} fullWidth />
             </Box>
 
             <Box display="flex" justifyContent="space-between" mt={3}>
