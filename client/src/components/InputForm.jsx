@@ -1,9 +1,10 @@
-import * as React from "react";
+// import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { useAddUserMutation } from "../store";
 import { useRef } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const InputForm = () => {
     const [addUser, results] = useAddUserMutation();
@@ -35,8 +36,16 @@ const InputForm = () => {
                 inputRef={emailRef}
             />
 
-            <Button variant="contained" onClick={handleSubmit}>
-                Submit
+            <Button
+                variant="contained"
+                startIcon={<AddCircleIcon />}
+                onClick={handleSubmit}
+                sx={{
+                    borderRadius: "32px",
+                }}
+                
+            >
+                Add
             </Button>
         </Box>
     );

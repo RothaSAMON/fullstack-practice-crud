@@ -9,6 +9,7 @@ import {
 import { useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEditUserMutation, useGetSingleUserQuery } from "../store";
+import Navbar from "../components/Navbar";
 
 const EditPage = () => {
     const { id } = useParams();
@@ -36,7 +37,7 @@ const EditPage = () => {
             emailRef.current.value = user.data.user.email;
         }
         refetch();
-    //Adding refetch to the dependency array, the useEffect hook will be re-run whenever either user or refetch changes, ensuring that the input fields are updated correctly.
+        //Adding refetch to the dependency array, the useEffect hook will be re-run whenever either user or refetch changes, ensuring that the input fields are updated correctly.
     }, [user, refetch]);
     console.log(user?.data?.user);
 
@@ -68,43 +69,62 @@ const EditPage = () => {
         return <Typography color="error">Failed to load user data.</Typography>;
 
     return (
-        <Container
-            maxWidth="sm"
-            sx={{
-                mt: 4,
-                p: 3,
-                borderRadius: 2,
-                boxShadow: 3,
-                backgroundColor: "#f9f9f9",
-            }}
-        >
-            <Typography variant="h5" gutterBottom>
-                Edit User Details
-            </Typography>
+        <Box>
+            <Navbar />
+            <Container
+                maxWidth="sm"
+                sx={{
+                    mt: 4,
+                    p: 3,
+                    borderRadius: 2,
+                    boxShadow: 3,
+                    backgroundColor: "#f9f9f9",
+                }}
+            >
+                <Typography variant="h5" fontFamily={"cursive"} gutterBottom>
+                    Edit User Details
+                </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <TextField label="Name" inputRef={nameRef} fullWidth />
-                <TextField label="Email" inputRef={emailRef} fullWidth />
-            </Box>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <TextField label="Name" inputRef={nameRef} fullWidth />
+                    <TextField label="Email" inputRef={emailRef} fullWidth />
+                </Box>
 
-            <Box display="flex" justifyContent="space-between" mt={3}>
-                <Link to="/">
-                    <Button variant="text">Cancel</Button>
-                </Link>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSave}
-                    disabled={isEditLoading} // Disable while saving
-                >
-                    {isEditLoading ? <CircularProgress size={24} /> : "Save"}
-                </Button>
-            </Box>
+                <Box display="flex" justifyContent="space-between" mt={3}>
+                    <Link to="/">
+                        <Button
+                            variant="text"
+                            sx={{
+                                borderRadius: "32px",
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                    </Link>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSave}
+                        disabled={isEditLoading} // Disable while saving
+                        sx={{
+                            borderRadius: "32px",
+                        }}
+                    >
+                        {isEditLoading ? (
+                            <CircularProgress size={24} />
+                        ) : (
+                            "Save"
+                        )}
+                    </Button>
+                </Box>
 
-            {isEditError && (
-                <Typography color="error">Failed to save changes.</Typography>
-            )}
-        </Container>
+                {isEditError && (
+                    <Typography color="error">
+                        Failed to save changes.
+                    </Typography>
+                )}
+            </Container>
+        </Box>
     );
 };
 

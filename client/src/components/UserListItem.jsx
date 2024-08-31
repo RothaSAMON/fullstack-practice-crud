@@ -1,9 +1,14 @@
-// import * as React from "react";
+import * as React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Button, Typography, CircularProgress } from "@mui/material";
 import { useDeleteUserMutation } from "../store";
 import { useNavigate } from "react-router-dom";
+import EditNoteRoundedIcon from "@mui/icons-material/EditNoteRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import AnchorTemporaryDrawer from "../components/Sidebar";
+import verifyMe from "../assets/icons/VerifyME-Logo.svg";
+import Badge from "../assets/icons/Badge.svg";
 
 const UserListItem = ({ name, email, id }) => {
     const [deleteUser, { isLoading, isError, isSuccess }] =
@@ -27,7 +32,9 @@ const UserListItem = ({ name, email, id }) => {
             sx={{
                 display: "flex",
                 justifyContent: "center", // Centers the card horizontally
-                m: 2, // Margin around the card
+                marginTop: 2, // Margin around the card
+                marginBottom: 2, // Margin around the card
+                position: "relative", // Make this container relative for absolute positioning inside
             }}
         >
             <Paper
@@ -39,9 +46,30 @@ const UserListItem = ({ name, email, id }) => {
                     display: "flex",
                     flexDirection: "column",
                     gap: 2, // Gap between elements
-                    borderRadius: '16px'
+                    borderRadius: "8px",
+                    position: "relative", // Ensure Paper has relative positioning for children
                 }}
             >
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        zIndex: 10, // Ensure it's on top of other elements
+                    }}
+                >
+                    {/* Sidebar section */}
+                    <AnchorTemporaryDrawer />
+                </Box>
+                <Box
+                    component="img"
+                    sx={{
+                        // height: 100,
+                        // width: 120,
+                    }}
+                    alt="The house from the offer."
+                    src={Badge}
+                />
                 <Typography variant="h6" gutterBottom>
                     {name}
                 </Typography>
@@ -54,8 +82,8 @@ const UserListItem = ({ name, email, id }) => {
                     justifyContent="space-between" // Space out buttons
                     mt={2} // Add some margin-top to the button container
                 >
-                    <Button onClick={handleUpdate} variant="contained">
-                        Edit
+                    <Button onClick={handleUpdate} variant="outlined">
+                        <EditNoteRoundedIcon />
                     </Button>
                     <Button
                         onClick={handleDelete}
@@ -63,7 +91,11 @@ const UserListItem = ({ name, email, id }) => {
                         color="error"
                         disabled={isLoading} // Disable button while loading
                     >
-                        {isLoading ? <CircularProgress size={24} /> : "Delete"}
+                        {isLoading ? (
+                            <CircularProgress size={24} />
+                        ) : (
+                            <DeleteRoundedIcon fontSize="small" />
+                        )}
                     </Button>
                 </Box>
                 {isError && (
