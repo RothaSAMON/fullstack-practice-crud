@@ -20,8 +20,9 @@ const InputForm = () => {
         nameRef.current.value = "";
         emailRef.current.value = "";
     };
+
     return (
-        <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
+        <Box sx={{ display: "flex", gap: 2, marginBottom: 4, alignItems: 'center' }}>
             <TextField
                 id="outlined-multiline-flexible"
                 label="Name"
@@ -41,7 +42,8 @@ const InputForm = () => {
                 startIcon={<AddCircleIcon />}
                 onClick={handleSubmit}
                 sx={{
-                    borderRadius: "32px",
+                    borderRadius: "100px",
+                    height: '40px'
                 }}
                 
             >

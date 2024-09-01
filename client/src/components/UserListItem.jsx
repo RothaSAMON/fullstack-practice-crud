@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Button, Typography, CircularProgress } from "@mui/material";
@@ -83,9 +82,26 @@ const UserListItem = ({ name, email, id }) => {
                     justifyContent="space-between" // Space out buttons
                     mt={2} // Add some margin-top to the button container
                 >
-                    <Button onClick={handleUpdate} variant="outlined">
+                    
+                    {/* Button Edit */}
+                    <Button
+                        onClick={handleUpdate}
+                        variant="outlined"
+                        sx={{
+                            ":hover": {
+                                backgroundColor: "primary.main", // Set the background color to blue on hover
+                                borderColor: "primary.main", // Optional: Change the border color to match the hover effect
+                                color: 'white'
+                            },
+                            color: "primary", // Inherit text color or set it explicitly
+                            borderRadius: 1, // Optional: Custom border radius
+                            // transition: "background-color 0.3s ease", // Optional: Smooth transition
+                        }}
+                    >
                         <EditNoteRoundedIcon />
                     </Button>
+
+                    {/* Button Delete */}
                     <Button
                         onClick={handleDelete}
                         variant="contained"

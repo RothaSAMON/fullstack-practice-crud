@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
     AppBar,
     Box,
@@ -54,7 +54,7 @@ function Navbar() {
 
     const buttonStyle = {
         color: "text.primary",
-        fontWeight: "bold",
+        fontWeight: "medium",
     };
 
     return (
