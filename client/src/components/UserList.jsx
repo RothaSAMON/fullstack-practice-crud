@@ -1,7 +1,8 @@
 // import React from 'react';
 import { useGetAllUsersQuery } from "../store/api/userApi";
 import UserListItem from "./UserListItem";
-import { Box, useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
+
 const UserList = () => {
 
     //Responsive style
@@ -19,32 +20,23 @@ const UserList = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
+
     const response = data.data.users;
-    const renderUsers = response.map((user) => {
-        return (
+    const renderUsers = response.map((user) => (
+        <Grid item xs={12} sm={6} md={4} key={user.id}>
             <UserListItem
-                key={user.id}
                 name={user.name}
                 email={user.email}
                 id={user.id}
             />
-        );
-    });
+        </Grid>
+    ));
 
     // Display the list of users
     return (
-        <Box
-            sx={{
-                display: "grid",
-                columnGap: 3,
-                rowGap: 1,
-                gridTemplateColumns: isNonMobile
-                    ? "repeat(3, 1fr)"
-                    : "repeat(1, 1fr)",
-            }}
-        >
+        <Grid container spacing={4}>
             {renderUsers}
-        </Box>
+        </Grid>
     );
 };
 

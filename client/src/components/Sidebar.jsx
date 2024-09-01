@@ -19,7 +19,7 @@ import ShortTextRoundedIcon from '@mui/icons-material/ShortTextRounded';
 
 export default function AnchorTemporaryDrawer() {
     const [state, setState] = React.useState({
-        right: false,
+        left: false, // Change to manage the left side drawer
     });
 
     const [activeItem, setActiveItem] = React.useState(null); // Track active item
@@ -31,7 +31,7 @@ export default function AnchorTemporaryDrawer() {
         ) {
             return;
         }
-        setState({ right: open });
+        setState({ left: open }); // Update to manage the left side drawer
     };
 
     const handleListItemClick = (index) => {
@@ -146,8 +146,8 @@ export default function AnchorTemporaryDrawer() {
                 <ShortTextRoundedIcon />
             </Button>
             <Drawer
-                anchor="right"
-                open={state.right}
+                anchor="left" // Change anchor to left
+                open={state.left} // Open the left side drawer
                 onClose={toggleDrawer(false)}
             >
                 {list()}

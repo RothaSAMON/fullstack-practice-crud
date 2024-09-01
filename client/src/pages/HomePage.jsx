@@ -9,7 +9,7 @@ const HomePage = () => {
     return (
         <div>
             <ResponsiveNavBar />
-            <Container sx={{  marginTop: 6 }}>
+            <Container sx={{  my: 4 }}>
                 <Box>
                     <InputForm />
                     {/* <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)'}}>

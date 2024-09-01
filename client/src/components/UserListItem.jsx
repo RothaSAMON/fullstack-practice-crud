@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import EditNoteRoundedIcon from "@mui/icons-material/EditNoteRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import AnchorTemporaryDrawer from "../components/Sidebar";
-import verifyMe from "../assets/icons/VerifyME-Logo.svg";
 import Badge from "../assets/icons/Badge.svg";
 
 const UserListItem = ({ name, email, id }) => {
@@ -32,8 +31,8 @@ const UserListItem = ({ name, email, id }) => {
             sx={{
                 display: "flex",
                 justifyContent: "center", // Centers the card horizontally
-                marginTop: 2, // Margin around the card
-                marginBottom: 2, // Margin around the card
+                // marginTop: 2, // Margin around the card
+                // marginBottom: 2, // Margin around the card
                 position: "relative", // Make this container relative for absolute positioning inside
             }}
         >
@@ -53,8 +52,8 @@ const UserListItem = ({ name, email, id }) => {
                 <Box
                     sx={{
                         position: "absolute",
-                        top: 0,
-                        right: 0,
+                        top: 16,
+                        right: 16,
                         zIndex: 10, // Ensure it's on top of other elements
                     }}
                 >
@@ -63,10 +62,12 @@ const UserListItem = ({ name, email, id }) => {
                 </Box>
                 <Box
                     component="img"
-                    sx={{
-                        // height: 100,
-                        // width: 120,
-                    }}
+                    sx={
+                        {
+                            // height: 100,
+                            // width: 120,
+                        }
+                    }
                     alt="The house from the offer."
                     src={Badge}
                 />

@@ -21,7 +21,7 @@ const InputForm = () => {
         emailRef.current.value = "";
     };
     return (
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
             <TextField
                 id="outlined-multiline-flexible"
                 label="Name"
