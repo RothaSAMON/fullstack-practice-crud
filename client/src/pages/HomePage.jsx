@@ -13,9 +13,6 @@ const HomePage = () => {
             <Container sx={{  my: 4 }}>
                 <Box>
                     <InputForm />
-                    {/* <Box sx={{ display: 'grid', gridTemplateRows: 'repeat(3, 1fr)'}}>
-                        <UserList />
-                    </Box> */}
                     <UserList />
                 </Box>
             </Container>

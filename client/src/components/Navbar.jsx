@@ -10,6 +10,7 @@ import {
     Container,
     Slide,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import verifyMe from "../assets/icons/VerifyME-Logo.svg";
 
@@ -71,14 +72,16 @@ function Navbar() {
                 <Container maxWidth="lg" sx={{ maxWidth: "1600px" }}>
                     <Toolbar disableGutters>
                         <Box flexGrow={1} display={"flex"}>
-                            <Box
-                                component="img"
-                                sx={{
-                                    width: 120,
-                                }}
-                                alt="The house from the offer."
-                                src={verifyMe}
-                            />
+                            <Link to={"/"}>
+                                <Box
+                                    component="img"
+                                    sx={{
+                                        width: 120,
+                                    }}
+                                    alt="The house from the offer."
+                                    src={verifyMe}
+                                />
+                            </Link>
                         </Box>
                         <Box
                             sx={{
@@ -90,23 +93,31 @@ function Navbar() {
                             }}
                         >
                             <Box display={"flex"} gap={2}>
-                                <Button sx={buttonStyle}>Price</Button>
-                                <Button sx={buttonStyle}>Contact Us</Button>
+                                <Link to="/pricing">
+                                    <Button sx={buttonStyle}>Price</Button>
+                                </Link>
+                                <Link to="/contactus">
+                                    <Button sx={buttonStyle}>Contact Us</Button>
+                                </Link>
                             </Box>
 
                             <Box display={"flex"} gap={2}>
-                                <Button
-                                    variant="outlined"
-                                    sx={{ borderRadius: 32 }}
-                                >
-                                    Sign In
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    sx={{ borderRadius: 32 }}
-                                >
-                                    Sign Up
-                                </Button>
+                                <Link to="/signin">
+                                    <Button
+                                        variant="outlined"
+                                        sx={{ borderRadius: 32 }}
+                                    >
+                                        Sign In
+                                    </Button>
+                                </Link>
+                                <Link to="/signup">
+                                    <Button
+                                        variant="contained"
+                                        sx={{ borderRadius: 32 }}
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </Link>
                             </Box>
                         </Box>
                         <Box sx={{ display: { xs: "flex", md: "none" } }}>
